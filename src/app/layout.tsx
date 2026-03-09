@@ -1,20 +1,33 @@
-import type { Metadata } from 'next';
-import { ThemeProvider } from 'next-themes';
-import { Onest } from 'next/font/google';
+import type { Metadata, Viewport } from 'next';
+import { Inter } from 'next/font/google';
 import './globals.css';
 import { ToasterProvider } from './providers/toaster';
 
-const onest = Onest({
+const inter = Inter({
   subsets: ['latin'],
+  variable: '--font-sans',
 });
 
 export const metadata: Metadata = {
   title: {
-    default: 'Demo AIStarterKit OSS - Next.js AI Starter Kit Demo',
-    template: '%s | AIStarterKit OSS Demo',
+    default: 'GestoH - Digitaliza tu Restaurante en Quito',
+    template: '%s | GestoH',
   },
   description:
-    'Demo website of AIStarterKit OSS boilerplate. Built using Next.js, Tailwind CSS, Drizzle ORM, and PostgreSQL.',
+    'Sistema de tablets para meseros y pantallas de cocina para restaurantes en Quito. Acelera el servicio, elimina errores y aumenta ganancias. Desde $12/mes.',
+  keywords: ['restaurante', 'quito', 'ecuador', 'pos', 'tablet', 'meseros', 'cocina', 'facturacion electronica', 'sri'],
+  openGraph: {
+    title: 'GestoH - Digitaliza tu Restaurante en Quito',
+    description: 'Sistema de tablets para meseros y pantallas de cocina. Acelera el servicio, elimina errores.',
+    locale: 'es_EC',
+    type: 'website',
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: '#0f172a',
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -23,17 +36,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="es">
       <body
-        className={`bg-gray-50 dark:bg-dark-secondary min-h-screen flex flex-col ${onest.className}`}
+        className={`bg-white min-h-screen flex flex-col ${inter.className} antialiased`}
       >
-        <ThemeProvider disableTransitionOnChange>
-          {/* ToasterProvider must render before the children components */}
-          {/* https://github.com/emilkowalski/sonner/issues/168#issuecomment-1773734618 */}
-          <ToasterProvider />
-
-          <div className="isolate flex flex-col flex-1">{children}</div>
-        </ThemeProvider>
+        <ToasterProvider />
+        <div className="isolate flex flex-col flex-1">{children}</div>
       </body>
     </html>
   );
