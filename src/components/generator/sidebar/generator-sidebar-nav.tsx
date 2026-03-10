@@ -4,6 +4,8 @@ import { TextGeneratorIcon } from '@/icons/icons';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useLocale } from '@/lib/locale';
+import { getLocalizedPath } from '@/lib/locale';
 
 const navItems = [
   {
@@ -15,6 +17,7 @@ const navItems = [
 
 export default function GeneratorSidebarNav() {
   const pathname = usePathname();
+  const locale = useLocale();
 
   return (
     <div className="px-5 py-6">
@@ -23,12 +26,13 @@ export default function GeneratorSidebarNav() {
       </h2>
       <nav className="mt-3 space-y-1">
         {navItems.map((item) => {
-          const isActive = pathname.includes(item.href);
+          const href = getLocalizedPath(item.href, locale);
+          const isActive = pathname.includes(href);
 
           return (
             <Link
               key={item.href}
-              href={item.href}
+              href={href}
               className={cn(
                 'relative flex gap-1.5 items-center h-11 px-2 py-3 text-sm font-medium rounded-full transition',
                 isActive

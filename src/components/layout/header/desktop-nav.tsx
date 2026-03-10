@@ -4,9 +4,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { navItems } from './nav-items';
 import { useEffect, useState } from 'react';
+import { useLocale } from '@/lib/locale';
+import { getLocalizedPath } from '@/lib/locale';
 
 export default function DesktopNav() {
   const pathname = usePathname();
+  const locale = useLocale();
   const [activeDropdownKey, setActiveDropdownKey] = useState('');
 
   function toggleActiveDropdown(key: string) {
@@ -22,15 +25,16 @@ export default function DesktopNav() {
     <nav className="hidden lg:flex lg:items-center bg-[#F9FAFB] dark:bg-white/3 rounded-full p-1 max-h-fit">
       {navItems.map((item) => {
         if (item.type === 'link') {
+          const href = getLocalizedPath(item.href, locale);
           return (
             <Link
               key={item.href}
-              href={item.href}
+              href={href}
               className={cn(
                 'text-gray-500 dark:text-gray-400 text-sm px-4 py-1.5 rounded-full hover:text-primary-500 font-medium',
                 {
                   'bg-white dark:bg-white/5 font-medium text-gray-800 dark:text-white/90 shadow-xs':
-                    pathname === item.href,
+                    pathname === href,
                 }
               )}
             >
@@ -61,7 +65,9 @@ export default function DesktopNav() {
                   'text-gray-500 dark:text-gray-400 hover:text-primary-500 group text-sm inline-flex gap-1 items-center px-4 py-1.5 font-medium rounded-full',
                   {
                     'bg-white dark:bg-white/5 font-medium text-gray-800 dark:text-white/90 shadow-xs':
-                      item.items.some(({ href }) => pathname?.includes(href)),
+                      item.items.some(({ href }) =>
+                        pathname?.includes(getLocalizedPath(href, locale))
+                      ),
                   }
                 )}
               >
@@ -88,7 +94,7 @@ export default function DesktopNav() {
                     {item.items.map((subItem) => (
                       <Link
                         key={subItem.href}
-                        href={subItem.href}
+                        href={getLocalizedPath(subItem.href, locale)}
                         className="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/5"
                       >
                         {subItem.label}

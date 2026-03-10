@@ -11,7 +11,27 @@ import {
   VideoGeneratorIcon,
 } from '@/icons/icons';
 import Image from 'next/image';
+import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import type { Locale } from '@/lib/i18n';
+import { copy } from '@/content/copy';
+import { getLocalizedPath } from '@/lib/locale';
+
+const TAB_IMAGES = [
+  { light: '/images/tab-image/tab-image-1.jpg', dark: '/images/tab-image/tab-image-1-dark.jpg' },
+  { light: '/images/tab-image/tab-image-2.jpg', dark: '/images/tab-image/tab-image-2-dark.jpg' },
+  { light: '/images/tab-image/tab-image-3.jpg', dark: '/images/tab-image/tab-image-3-dark.jpg' },
+  { light: '/images/tab-image/tab-image-4.jpg', dark: '/images/tab-image/tab-image-4-dark.jpg' },
+  { light: '/images/tab-image/tab-image-5.jpg', dark: '/images/tab-image/tab-image-5-dark.jpg' },
+];
+
+const TAB_ICONS = [
+  <TextGeneratorIcon key="1" className="w-8 h-8" />,
+  <ImageGeneratorIcon key="2" className="w-8 h-8" />,
+  <CodeGeneratorIcon key="3" className="w-8 h-8" />,
+  <VideoGeneratorIcon key="4" className="w-8 h-8" />,
+  <EmailGeneratorIcon key="5" className="w-8 h-8" />,
+];
 
 // Define the tab type
 interface Tab {
@@ -24,64 +44,20 @@ interface Tab {
   description: string;
 }
 
-export default function AIToolsTabs() {
-  const [activeTab, setActiveTab] = useState('text');
+export default function AIToolsTabs({ locale }: { locale: Locale }) {
+  const [activeTab, setActiveTab] = useState(copy[locale].toolsTab.tabs[0].id);
+  const t = copy[locale].toolsTab;
 
-  // Tab data
-  const tabs: Tab[] = [
-    {
-      id: 'text',
-      label: 'Text Generator',
-      icon: <TextGeneratorIcon className="w-8 h-8" />,
-      lightImage: '/images/tab-image/tab-image-1.jpg',
-      darkImage: '/images/tab-image/tab-image-1-dark.jpg',
-      title: 'Easiest way to generate text',
-      description:
-        'Unlock the Potential of Innovation. Discover the Advanced AI Tools Transforming Your Ideas into Reality with Unmatched Precision and Intelligence.',
-    },
-    {
-      id: 'image',
-      label: 'Image Generator',
-      icon: <ImageGeneratorIcon className="w-8 h-8" />,
-      lightImage: '/images/tab-image/tab-image-2.jpg',
-      darkImage: '/images/tab-image/tab-image-2-dark.jpg',
-      title: 'Create stunning images with AI',
-      description:
-        'Unlock the Potential of Innovation. Discover the Advanced AI Tools Transforming Your Ideas into Reality with Unmatched Precision and Intelligence.',
-    },
-    {
-      id: 'code',
-      label: 'Code Generator',
-      icon: <CodeGeneratorIcon className="w-8 h-8" />,
-      lightImage: '/images/tab-image/tab-image-3.jpg',
-      darkImage: '/images/tab-image/tab-image-3-dark.jpg',
-      title: 'Generate code in any language',
-      description:
-        'Unlock the Potential of Innovation. Discover the Advanced AI Tools Transforming Your Ideas into Reality with Unmatched Precision and Intelligence.',
-    },
-    {
-      id: 'video',
-      label: 'Video Generator',
-      icon: <VideoGeneratorIcon className="w-8 h-8" />,
-      lightImage: '/images/tab-image/tab-image-4.jpg',
-      darkImage: '/images/tab-image/tab-image-4-dark.jpg',
-      title: 'Create engaging videos with AI',
-      description:
-        'Unlock the Potential of Innovation. Discover the Advanced AI Tools Transforming Your Ideas into Reality with Unmatched Precision and Intelligence.',
-    },
-    {
-      id: 'email',
-      label: 'Email Generator',
-      icon: <EmailGeneratorIcon className="w-8 h-8" />,
-      lightImage: '/images/tab-image/tab-image-5.jpg',
-      darkImage: '/images/tab-image/tab-image-5-dark.jpg',
-      title: 'Write professional emails instantly',
-      description:
-        'Unlock the Potential of Innovation. Discover the Advanced AI Tools Transforming Your Ideas into Reality with Unmatched Precision and Intelligence.',
-    },
-  ];
+  const tabs: Tab[] = t.tabs.map((tab, i) => ({
+    id: tab.id,
+    label: tab.label,
+    icon: TAB_ICONS[i],
+    lightImage: TAB_IMAGES[i].light,
+    darkImage: TAB_IMAGES[i].dark,
+    title: tab.title,
+    description: tab.description,
+  }));
 
-  // Find the active tab
   const currentTab = tabs.find((tab) => tab.id === activeTab) || tabs[0];
 
   return (
@@ -89,12 +65,10 @@ export default function AIToolsTabs() {
       <div className="wrapper">
         <div className="max-w-2xl mx-auto mb-12 text-center">
           <h2 className="mb-3 font-bold text-center text-gray-800 dark:text-white/90 text-3xl md:text-title-lg">
-            All the AI tools you need, at your Fingertips.
+            {t.title}
           </h2>
           <p className="max-w-2xl mx-auto leading-6 text-gray-500 dark:text-gray-400">
-            Unlock the Potential of Innovation, Discover the Advanced AI Tools
-            Transforming Your Ideas into Reality with Unmatched Precision and
-            Intelligence.
+            {t.subtitle}
           </p>
         </div>
 
@@ -164,9 +138,12 @@ export default function AIToolsTabs() {
               <p className="max-w-xl mx-auto mb-6 text-sm text-gray-500 dark:text-gray-400">
                 {currentTab.description}
               </p>
-              <button className="px-6 py-3 text-sm font-medium text-white transition-colors rounded-full bg-primary-500 hover:bg-primary-600">
-                Try it now for free
-              </button>
+              <Link
+                href={getLocalizedPath('/contact', locale)}
+                className="inline-block px-6 py-3 text-sm font-medium text-white transition-colors rounded-full bg-primary-500 hover:bg-primary-600"
+              >
+                {t.cta}
+              </Link>
             </div>
           </div>
         </div>

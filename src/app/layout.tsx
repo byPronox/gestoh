@@ -10,11 +10,11 @@ const onest = Onest({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Demo AIStarterKit OSS - Next.js AI Starter Kit Demo',
-    template: '%s | AIStarterKit OSS Demo',
+    default: 'Gestoh — Ecosistema de automatización para negocios locales',
+    template: '%s | Gestoh',
   },
   description:
-    'Demo website of AIStarterKit OSS boilerplate. Built using Next.js, Tailwind CSS, Drizzle ORM, and PostgreSQL.',
+    'Transformamos negocios locales y PYMES con un ecosistema de automatización total: punto de venta, inventario, facturación y presencia digital en un solo sistema.',
 };
 
 export default function RootLayout({

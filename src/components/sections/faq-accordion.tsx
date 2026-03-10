@@ -2,50 +2,23 @@
 
 import { MinusIcon, PlusIcon } from "@/icons/icons";
 import { useState } from "react";
+import type { Locale } from '@/lib/i18n';
+import { copy } from '@/content/copy';
 
-// Define the FAQ item type
-interface FAQItem {
+interface FAQItemType {
   id: number;
   question: string;
   answer: string;
 }
 
-export default function FaqAccordion() {
+export default function FaqAccordion({ locale }: { locale: Locale }) {
   const [activeItem, setActiveItem] = useState<number | null>(1);
-
-  // FAQ data
-  const faqItems: FAQItem[] = [
-    {
-      id: 1,
-      question: "Do I get free updates?",
-      answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean luctus magna quis tellus euismod, eget pharetra leo mollis. Donec eget lacus non elit blandit pharetra vitae volutpat libero.",
-    },
-    {
-      id: 2,
-      question: 'What does the number of "Projects" refer to?',
-      answer:
-        'The number of "Projects" refers to the total number of separate workspaces you can create and manage within your account. Each project can have its own settings, team members, and resources.',
-    },
-    {
-      id: 3,
-      question: "Can I upgrade to a higher plan?",
-      answer:
-        "Yes, you can upgrade to a higher plan at any time. When you upgrade, you'll be charged the prorated difference for the remainder of your current billing cycle. Your new features will be available immediately after upgrading.",
-    },
-    {
-      id: 4,
-      question: 'What does "Unlimited Projects" mean?',
-      answer:
-        '"Unlimited Projects" means you can create as many projects as you need without any restrictions. This allows you to organize your work efficiently without worrying about hitting a project limit.',
-    },
-    {
-      id: 5,
-      question: "How can I add Open AI Key?",
-      answer:
-        'To add your OpenAI API key, go to your account settings and navigate to the "API Keys" section. Click on "Add New Key", paste your OpenAI API key, and save your changes. The key will be securely stored and used for all AI-powered features.',
-    },
-  ];
+  const t = copy[locale].faq;
+  const faqItems: FAQItemType[] = t.items.map((item, i) => ({
+    id: i + 1,
+    question: item.question,
+    answer: item.answer,
+  }));
 
   const toggleItem = (itemId: number) => {
     setActiveItem(activeItem === itemId ? null : itemId);
@@ -56,11 +29,10 @@ export default function FaqAccordion() {
       <div className="wrapper">
         <div className="max-w-2xl mx-auto mb-12 text-center">
           <h2 className="mb-3 font-bold text-center text-gray-800 text-3xl dark:text-white/90 md:text-title-lg">
-            Frequently Asked Questions
+            {t.title}
           </h2>
           <p className="max-w-md mx-auto leading-6 text-gray-500 dark:text-gray-400">
-            Answered all frequently asked questions, Still confused? feel free
-            contact with us
+            {t.subtitle}
           </p>
         </div>
         <div className="max-w-[600px] mx-auto">
@@ -80,13 +52,12 @@ export default function FaqAccordion() {
   );
 }
 
-// FAQ Item Component
 function FAQItem({
   item,
   isActive,
   onToggle,
 }: {
-  item: FAQItem;
+  item: FAQItemType;
   isActive: boolean;
   onToggle: () => void;
 }) {

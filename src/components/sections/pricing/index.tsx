@@ -7,24 +7,25 @@ import {
 } from '@/components/sections/pricing/data';
 import { cn } from '@/lib/utils';
 import { PricingCard } from '@/components/sections/pricing/card';
+import type { Locale } from '@/lib/i18n';
+import { copy } from '@/content/copy';
 
 type BillingPeriodKey = (typeof BILLING_PERIODS)[number]['key'];
 
-export default function PricingSection() {
+export default function PricingSection({ locale }: { locale: Locale }) {
   const [activeBillingPeriodKey, setActiveBillingPeriodKey] =
     useState<BillingPeriodKey>('monthly');
+  const t = copy[locale].pricing;
 
   return (
     <section className="py-14 md:py-30 bg-gray-50 dark:bg-[#171f2e] dark:bg-linear-180 dark:from-white/3 dark:from-[45.56%] dark:to-white/0">
       <div className="wrapper">
         <div className="max-w-2xl mx-auto mb-12 text-center">
           <h2 className="mb-3 font-bold text-center text-gray-800 text-3xl dark:text-white/90 md:text-title-lg">
-            Start Your Content Creation Journey with AI
+            {t.title}
           </h2>
           <p className="max-w-xl mx-auto leading-6 text-gray-500 dark:text-gray-400">
-            Collaborate with AI to generate content that resonates with your
-            audience, drives and delivers meaningful results across all
-            platforms.
+            {t.subtitle}
           </p>
         </div>
 
@@ -47,11 +48,11 @@ export default function PricingSection() {
                     }
                   )}
                 >
-                  {period.label}
+                  {period.key === 'monthly' ? t.monthly : t.annually}
 
                   {period.saving && (
                     <span className="bg-orange-400 text-white text-xs px-2 py-0.5 rounded-full">
-                      Save {period.saving}
+                      {t.save} {period.saving}
                     </span>
                   )}
                 </button>

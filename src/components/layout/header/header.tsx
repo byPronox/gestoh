@@ -6,11 +6,15 @@ import { useEffect, useState } from 'react';
 import DesktopNav from './desktop-nav';
 import MainMobileNav from './main-mobile-nav';
 import ThemeToggle from './theme-toggle';
+import LanguageSwitcher from './language-switcher';
 import { usePathname } from 'next/navigation';
+import { useLocale } from '@/lib/locale';
+import { getLocalizedPath } from '@/lib/locale';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const locale = useLocale();
 
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -21,7 +25,7 @@ export default function Header() {
       <div className="px-4 sm:px-6 lg:px-7">
         <div className="grid grid-cols-2 items-center lg:grid-cols-[1fr_auto_1fr]">
           <div className="flex items-center">
-            <Link href="/" className="flex items-end gap-2">
+            <Link href={getLocalizedPath('/', locale)} className="flex items-end gap-2">
               <Image
                 src="/images/logo-black.svg"
                 className="block dark:hidden"
@@ -39,7 +43,7 @@ export default function Header() {
               />
 
               <span className="inline-block px-1.5 py-0.5 rounded-lg rounded-bl-none bg-primary-500/90 text-white text-xs font-medium mb-0.5">
-                Demo
+                Gestoh
               </span>
             </Link>
           </div>
@@ -47,6 +51,7 @@ export default function Header() {
           <DesktopNav />
 
           <div className="flex items-center gap-4 justify-self-end">
+            <LanguageSwitcher />
             <ThemeToggle />
 
             <button
@@ -60,19 +65,7 @@ export default function Header() {
               {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
             </button>
 
-            <Link
-              href="/signin"
-              className="text-sm hidden lg:block font-medium text-gray-700 dark:text-gray-400 hover:text-primary-500"
-            >
-              Sign In
-            </Link>
-
-            <Link
-              href="/signup"
-              className="lg:inline-flex items-center px-5 py-3 gradient-btn hidden text-sm text-white rounded-full button-bg h-11"
-            >
-              Get Started Free
-            </Link>
+            {/* Auth links removed for landing-only header */}
           </div>
         </div>
       </div>

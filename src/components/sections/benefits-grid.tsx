@@ -1,19 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { getLocalizedPath } from '@/lib/i18n';
+import type { Locale } from '@/lib/i18n';
+import { copy } from '@/content/copy';
 
-export default function BenefitsGrid() {
+export default function BenefitsGrid({ locale }: { locale: Locale }) {
+  const t = copy[locale].benefits;
   return (
     <section className="bg-gray-900 py-14 md:py-28">
       <div className="wrapper">
         <div className="max-w-2xl mx-auto mb-12 text-center">
           <h2 className="max-w-lg mx-auto mb-3 font-bold text-center text-white dark:text-white/90 text-3xl md:text-title-lg">
-            The key benefits of using our tools.
+            {t.title}
           </h2>
           <p className="max-w-2xl mx-auto text-base dark: font-normal leading-6 text-white/50">
-            Unlock the Potential of Innovation. Discover the Advanced AI Tools
-            Transforming Your Ideas into Reality with Unmatched Precision and
-            Intelligence.
+            {t.subtitle}
           </p>
         </div>
         <div className="max-w-[1008px] mx-auto">
@@ -22,11 +24,10 @@ export default function BenefitsGrid() {
               <div className="relative flex flex-col justify-between bg-primary-500 rounded-[20px] p-9 md:p-13">
                 <div className="max-w-sm mb-32">
                   <h3 className="font-bold text-white text-2xl md:text-3xl mb-4">
-                    Craft Professional-Grade Content with AI
+                    {t.card1Title}
                   </h3>
                   <p className="text-base text-white/70">
-                    Transform your ideas into groundbreaking realities with
-                    advanced AI tools.
+                    {t.card1Text}
                   </p>
                 </div>
                 <div>
@@ -184,11 +185,10 @@ export default function BenefitsGrid() {
                 </div>
                 <div>
                   <h3 className="font-bold max-w-xs text-white text-2xl md:text-3xl mb-4">
-                    Boost your Productivity 10X with our AI agent tools.
+                    {t.card2Title}
                   </h3>
                   <p className="text-base max-w-sm text-white/70">
-                    Unlock the Potential of Innovation, Discover the Advanced AI
-                    Tools Intelligence.
+                    {t.card2Text}
                   </p>
                 </div>
               </div>
@@ -197,17 +197,16 @@ export default function BenefitsGrid() {
               <div className="lg:px-12 p-8 bg-[#2D0B70] lg:pb-0 lg:p-12 relative rounded-[20px] h-full lg:flex lg:flex-row justify-between bg-cover flex-col gap-5">
                 <div className="max-w-sm relative z-10">
                   <h3 className="font-bold text-white text-2xl md:text-3xl mb-4">
-                    Overcome Writers Block Today
+                    {t.card2Title}
                   </h3>
                   <p className="text-base text-white/70 mb-8">
-                    Discover the cutting-edge AI tools that bring your ideas to
-                    life with exceptional accuracy.
+                    {t.card2Text}
                   </p>
                   <Link
-                    href="/email-generator"
+                    href={getLocalizedPath('/contact', locale)}
                     className="font-medium inline-block text-sm text-white rounded-full bg-primary-500 hover:bg-primary-600 transition py-3 px-6"
                   >
-                    Try it now for Free
+                    {t.card2Cta}
                   </Link>
                 </div>
                 <div>

@@ -87,7 +87,7 @@ export default function NotFoundPage() {
           We are sorry, But the page you requested was not found
         </p>
         <Link
-          href="/"
+          href="/en"
           className="inline-flex mt-8 text-white text-sm gap-2 items-center bg-primary-500 rounded-full py-3 px-5 transition hover:bg-primary-600"
         >
           <svg
