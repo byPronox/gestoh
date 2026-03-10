@@ -1,7 +1,6 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
 import { navItems } from './nav-items';
 import { cn } from '@/lib/utils';
 import { useLocale } from '@/lib/locale';
