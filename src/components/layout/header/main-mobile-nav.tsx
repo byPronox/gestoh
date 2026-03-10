@@ -14,7 +14,6 @@ export default function MainMobileNav({ isOpen }: MobileMenuProps) {
   const pathname = usePathname();
   const locale = useLocale();
 
-
   if (!isOpen) return null;
 
   return (
@@ -25,10 +24,11 @@ export default function MainMobileNav({ isOpen }: MobileMenuProps) {
             {navItems
               .filter((item) => item.type === 'link' && item.href !== '/text-generator')
               .map((item) => {
-                const href = getLocalizedPath(item.href, locale);
+                const href = getLocalizedPath(item.href || '/', locale);
+                
                 return (
                   <Link
-                    key={item.href}
+                    key={item.href || item.label}
                     href={href}
                     className={cn(
                       'block px-3 py-2 rounded-md text-sm font-medium text-gray-500 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700',
