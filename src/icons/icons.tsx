@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 type IconProps = React.SVGProps<SVGSVGElement>;
 
 export function CheckIcon() {

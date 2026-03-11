@@ -1,6 +1,5 @@
 'use client';
 
-import { cn } from '@/lib/utils';
 import { PricingCard, type TPlan } from '@/components/sections/pricing/card';
 import type { Locale } from '@/lib/i18n';
 import { copy } from '@/content/copy';
