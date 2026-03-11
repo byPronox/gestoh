@@ -1,25 +1,25 @@
 'use client';
 import { CheckIcon } from '@/icons/icons';
 import GlowGradient from '@/assets/pricing/glow';
-import type { TBILLING_PLAN } from '@/components/sections/pricing/data';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { PropsWithChildren } from 'react';
 import { useLocale } from '@/lib/locale';
 import { getLocalizedPath } from '@/lib/locale';
+import { copy } from '@/content/copy';
+
+export type TPlan = typeof copy.en.pricing.plans[0];
 
 type Props = {
-  plan: TBILLING_PLAN;
-  billingPeriod: keyof TBILLING_PLAN['pricing'];
+  plan: TPlan;
 };
 
-export function PricingCard({ plan, billingPeriod }: Props) {
+export function PricingCard({ plan }: Props) {
   return (
     <div className="relative">
       <div
-        className={`bg-white dark:bg-dark-primary rounded-[20px] shadow-one relative z-10 h-full ${
-          plan.popular ? 'relative border-2 border-primary-500' : ''
-        }`}
+        className={`bg-white dark:bg-dark-primary rounded-[20px] shadow-one relative z-10 h-full ${plan.popular ? 'relative border-2 border-primary-500' : ''
+          }`}
       >
         <div className="p-8">
           <div className="flex items-center justify-between">
@@ -34,12 +34,12 @@ export function PricingCard({ plan, billingPeriod }: Props) {
           </div>
           <p className="flex items-baseline mt-4">
             <span className="text-4xl font-semibold text-gray-800 dark:text-white/90">
-              {plan.pricing[billingPeriod].formattedPrice}
+              {plan.price}
             </span>
 
-            {!!plan.pricing[billingPeriod].amount && (
+            {!!plan.paymentType && (
               <span className="ml-1 text-sm text-gray-500 dark:text-gray-400">
-                {billingPeriod === 'yearly' ? 'Per year' : 'Per month'}
+                {plan.paymentType}
               </span>
             )}
           </p>
@@ -54,11 +54,9 @@ export function PricingCard({ plan, billingPeriod }: Props) {
               className={cn(
                 'block w-full px-8 py-3.5 mt-7 text-sm font-medium text-center rounded-full transition',
                 {
-                  'dark:bg-dark-primary dark:text-white/90 dark:hover:bg-gray-800 dark:border-gray-800 text-gray-800 bg-white border border-gray-200 hover:bg-gray-50':
-                    plan.name.includes('Free'),
                   'gradient-btn text-white': plan.popular,
                   'dark:hover:bg-primary-500 dark:bg-white/[0.03] hover:bg-gray-900 text-white bg-gray-700':
-                    !plan.popular && !plan.name.includes('Free'),
+                    !plan.popular,
                 }
               )}
             >

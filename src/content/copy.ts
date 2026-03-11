@@ -41,9 +41,15 @@ export const copy: Record<
     pricing: {
       title: string;
       subtitle: string;
-      monthly: string;
-      annually: string;
-      save: string;
+      plans: {
+        name: string;
+        price: string;
+        paymentType: string;
+        description: string;
+        features: string[];
+        cta: string;
+        popular: boolean;
+      }[];
     };
     faq: {
       title: string;
@@ -207,9 +213,64 @@ export const copy: Record<
       title: 'Plans that grow with your business',
       subtitle:
         'From a single location to multiple sites. Transparent pricing, no hidden fees.',
-      monthly: 'Monthly',
-      annually: 'Annually',
-      save: 'Save',
+      plans: [
+        {
+          name: 'Standard landing page',
+          price: '$100',
+          paymentType: 'One-time payment',
+          description:
+            'A professional custom landing page. Includes hosting advice and 6 months of free hosting.',
+          features: [
+            'Hosting consultation & purchase',
+            'Free hosting for 6 months',
+            'Professional custom landing page',
+          ],
+          cta: 'Buy now',
+          popular: false,
+        },
+        {
+          name: 'Plus plan',
+          price: '$200',
+          paymentType: 'One-time payment',
+          description:
+            'Everything in Standard, plus a complete website with CMS for self-managed updates.',
+          features: [
+            'Everything in Standard',
+            'Complete website with CMS',
+            'Self-managed content updates',
+          ],
+          cta: 'Buy now',
+          popular: true,
+        },
+        {
+          name: 'Pro plan',
+          price: '$300',
+          paymentType: 'One-time payment',
+          description:
+            'Complete implementation of the automated Odoo system for your business.',
+          features: [
+            'Complete Odoo system implementation',
+            'Full business automation',
+            'One-time payment',
+          ],
+          cta: 'Buy now',
+          popular: false,
+        },
+        {
+          name: 'Enterprise complete',
+          price: "Let's talk",
+          paymentType: '',
+          description:
+            'Custom website along with the complete Odoo system for your local business.',
+          features: [
+            'Custom tailored website',
+            'Complete Odoo system',
+            'Tailored enterprise implementation',
+          ],
+          cta: 'Contact us',
+          popular: false,
+        },
+      ],
     },
     faq: {
       title: 'Frequently asked questions',
@@ -401,9 +462,64 @@ export const copy: Record<
       title: 'Planes que crecen con tu negocio',
       subtitle:
         'Desde un solo local hasta múltiples puntos. Precios claros, sin sorpresas.',
-      monthly: 'Mensual',
-      annually: 'Anual',
-      save: 'Ahorra',
+      plans: [
+        {
+          name: 'Standard landing page',
+          price: '$100',
+          paymentType: 'Pago único',
+          description:
+            'Una landing page profesional a la medida. Incluye asesoría en hosting y 6 meses de hosting gratis.',
+          features: [
+            'Asesoría y compra de hosting',
+            'Host gratis por 6 meses',
+            'Landing page profesional a la medida',
+          ],
+          cta: 'Comprar ahora',
+          popular: false,
+        },
+        {
+          name: 'Plus plan',
+          price: '$200',
+          paymentType: 'Pago único',
+          description:
+            'Todo lo del plan Standard, además de una página completa con CMS para cambios constantes sin depender de nosotros.',
+          features: [
+            'Todo lo de Standard landing page',
+            'Página completa con CMS',
+            'Autogestión de cambios',
+          ],
+          cta: 'Comprar ahora',
+          popular: true,
+        },
+        {
+          name: 'Pro plan',
+          price: '$300',
+          paymentType: 'Pago único',
+          description:
+            'Implementación completa del sistema Odoo en su negocio automatizado todo con un pago único.',
+          features: [
+            'Implementación completa de Odoo',
+            'Negocio totalmente automatizado',
+            'Pago único',
+          ],
+          cta: 'Comprar ahora',
+          popular: false,
+        },
+        {
+          name: 'Enterprise complete',
+          price: 'Hablemos',
+          paymentType: '',
+          description:
+            'Página web a la medida junto con el sistema Odoo al completo para su local.',
+          features: [
+            'Página web a la medida',
+            'Sistema Odoo completo',
+            'Implementación personalizada',
+          ],
+          cta: 'Contactar ventas',
+          popular: false,
+        },
+      ],
     },
     faq: {
       title: 'Preguntas frecuentes',

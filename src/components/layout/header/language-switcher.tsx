@@ -22,9 +22,9 @@ export default function LanguageSwitcher() {
     getLocalizedPath(basePath, locale);
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-1 sm:gap-2">
       <LanguageIcon
-        className="size-5 text-gray-500 dark:text-gray-400 shrink-0"
+        className="size-4 sm:size-5 text-gray-500 dark:text-gray-400 shrink-0"
         aria-hidden
       />
       <div className="flex items-center rounded-full bg-gray-100 dark:bg-white/5 p-0.5">
@@ -32,11 +32,10 @@ export default function LanguageSwitcher() {
           <Link
             key={locale}
             href={pathForLocale(locale)}
-            className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${
-              currentLocale === locale
-                ? 'bg-white dark:bg-white/10 text-gray-800 dark:text-white/90 shadow-xs'
-                : 'text-gray-500 dark:text-gray-400 hover:text-primary-500'
-            }`}
+            className={`px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-medium rounded-full transition-colors ${currentLocale === locale
+              ? 'bg-white dark:bg-white/10 text-gray-800 dark:text-white/90 shadow-xs'
+              : 'text-gray-500 dark:text-gray-400 hover:text-primary-500'
+              }`}
             title={localeLabels[locale]}
           >
             {locale.toUpperCase()}

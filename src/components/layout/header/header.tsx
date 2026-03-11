@@ -25,10 +25,10 @@ export default function Header() {
       <div className="px-4 sm:px-6 lg:px-7">
         <div className="grid grid-cols-2 items-center lg:grid-cols-[1fr_auto_1fr]">
           <div className="flex items-center">
-            <Link href={getLocalizedPath('/', locale)} className="flex items-end gap-2">
+            <Link href={getLocalizedPath('/', locale)} className="flex items-end gap-1.5 sm:gap-2">
               <Image
                 src="/images/logo-black.svg"
-                className="block dark:hidden"
+                className="w-[110px] sm:w-[180px] block dark:hidden"
                 alt="AiStarterKit Logo"
                 width={180}
                 height={30}
@@ -36,13 +36,13 @@ export default function Header() {
 
               <Image
                 src="/images/logo-white.svg"
-                className="hidden dark:block"
+                className="w-[110px] sm:w-[180px] hidden dark:block"
                 alt="AiStarterKit Logo"
                 width={180}
                 height={30}
               />
 
-              <span className="inline-block px-1.5 py-0.5 rounded-lg rounded-bl-none bg-primary-500/90 text-white text-xs font-medium mb-0.5">
+              <span className="inline-block px-1 sm:px-1.5 py-0.5 rounded-lg rounded-bl-none bg-primary-500/90 text-white text-[10px] sm:text-xs font-medium mb-0.5">
                 Gestoh
               </span>
             </Link>
@@ -50,7 +50,7 @@ export default function Header() {
 
           <DesktopNav />
 
-          <div className="flex items-center gap-4 justify-self-end">
+          <div className="flex items-center gap-2 sm:gap-4 justify-self-end">
             <LanguageSwitcher />
             <ThemeToggle />
 

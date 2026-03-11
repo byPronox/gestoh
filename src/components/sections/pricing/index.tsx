@@ -1,20 +1,11 @@
 'use client';
 
-import { useState } from 'react';
-import {
-  BILLING_PERIODS,
-  BILLING_PLANS,
-} from '@/components/sections/pricing/data';
 import { cn } from '@/lib/utils';
-import { PricingCard } from '@/components/sections/pricing/card';
+import { PricingCard, type TPlan } from '@/components/sections/pricing/card';
 import type { Locale } from '@/lib/i18n';
 import { copy } from '@/content/copy';
 
-type BillingPeriodKey = (typeof BILLING_PERIODS)[number]['key'];
-
 export default function PricingSection({ locale }: { locale: Locale }) {
-  const [activeBillingPeriodKey, setActiveBillingPeriodKey] =
-    useState<BillingPeriodKey>('monthly');
   const t = copy[locale].pricing;
 
   return (
@@ -30,42 +21,11 @@ export default function PricingSection({ locale }: { locale: Locale }) {
         </div>
 
         <div>
-          {/* Billing Toggle */}
-          <div className="flex justify-center relative z-30 mt-12">
-            <div className="relative flex p-1 bg-white dark:bg-[#1D2939] rounded-full shadow-theme-xs">
-              {BILLING_PERIODS.map((period) => (
-                <button
-                  key={period.key}
-                  onClick={() => setActiveBillingPeriodKey(period.key)}
-                  className={cn(
-                    'relative flex items-center gap-2 px-6 py-2 text-sm font-medium transition-colors duration-200' +
-                      ' rounded-full' +
-                      ' text-gray-700 dark:text-gray-400',
-                    {
-                      'bg-gray-800 dark:bg-white/[0.05] text-white dark:text-white':
-                        period.key === activeBillingPeriodKey,
-                      'pr-2': period.saving,
-                    }
-                  )}
-                >
-                  {period.key === 'monthly' ? t.monthly : t.annually}
-
-                  {period.saving && (
-                    <span className="bg-orange-400 text-white text-xs px-2 py-0.5 rounded-full">
-                      {t.save} {period.saving}
-                    </span>
-                  )}
-                </button>
-              ))}
-            </div>
-          </div>
-
           <div className="mt-12 z-30 relative space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-6xl lg:mx-auto lg:grid-cols-3 xl:grid-cols-4">
-            {BILLING_PLANS.map((plan, index) => (
+            {t.plans.map((plan, index) => (
               <PricingCard
                 key={index}
-                plan={plan}
-                billingPeriod={activeBillingPeriodKey}
+                plan={plan as TPlan}
               />
             ))}
           </div>
