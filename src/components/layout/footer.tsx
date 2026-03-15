@@ -172,75 +172,32 @@ export default function Footer() {
               <div className="grid sm:grid-cols-2 gap-7">
                 <div>
                   <span className="block mb-6 text-sm text-gray-400">
-                    Services
+                    {t.services}
                   </span>
                   <nav className="flex flex-col space-y-3">
                     <Link
                       href={getLocalizedPath('/', locale)}
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
-                      Status
+                      {t.status}
                     </Link>
                     <Link
                       href={getLocalizedPath('/pricing', locale)}
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
-                      Pricing
+                      {t.pricing}
                     </Link>
                     <Link
                       href={getLocalizedPath('/pricing#faq', locale)}
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
-                      FAQ
-                    </Link>
-                    <Link
-                      href={getLocalizedPath('/contact', locale)}
-                      className="text-sm font-normal text-gray-400 transition hover:text-white"
-                    >
-                      Help Docs
+                      {t.faq}
                     </Link>
                     <Link
                       href={getLocalizedPath('/privacy', locale)}
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
-                      Privacy Policy
-                    </Link>
-                  </nav>
-                </div>
-                <div>
-                  <span className="block mb-6 text-sm text-gray-400">
-                    Features
-                  </span>
-                  <nav className="flex flex-col space-y-3">
-                    <Link
-                      href={getLocalizedPath('/', locale)}
-                      className="text-sm font-normal text-gray-400 transition hover:text-white"
-                    >
-                      HTML File Upload
-                    </Link>
-                    <Link
-                      href={getLocalizedPath('/', locale)}
-                      className="text-sm font-normal text-gray-400 transition hover:text-white"
-                    >
-                      HTML website hosting
-                    </Link>
-                    <Link
-                      href={getLocalizedPath('/', locale)}
-                      className="text-sm font-normal text-gray-400 transition hover:text-white"
-                    >
-                      Free Image Hosting
-                    </Link>
-                    <Link
-                      href={getLocalizedPath('/', locale)}
-                      className="text-sm font-normal text-gray-400 transition hover:text-white"
-                    >
-                      Upload PDF Online
-                    </Link>
-                    <Link
-                      href={getLocalizedPath('/', locale)}
-                      className="text-sm font-normal text-gray-400 transition hover:text-white"
-                    >
-                      Free Zip file hosting
+                      {t.privacyPolicy}
                     </Link>
                   </nav>
                 </div>

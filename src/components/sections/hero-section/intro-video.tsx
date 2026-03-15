@@ -26,34 +26,20 @@ export function IntroVideo({ label = 'Watch intro' }: { label?: string }) {
 
       if (!video) return false;
 
-      // 1. Forzamos el salto al segundo 1 inmediatamente al encontrar el video
-      // Esto evita que se alcance a ver el frame del segundo 0:00
-      if (video.currentTime < VIDEO_START_TIME) {
-        video.currentTime = VIDEO_START_TIME;
-      }
-
-      video.muted = true; // Nota: Si quieres que tu video tenga sonido, borra esta línea.
-
+      video.muted = true;
       const handleLoadedMetadata = () => {
         video.currentTime = VIDEO_START_TIME;
         video.play().catch(() => {});
       };
 
       const handleTimeUpdate = () => {
-        // 2. Cuando llega al segundo 142, lo regresamos al segundo 1 (bucle)
         if (video.currentTime >= VIDEO_END_TIME) {
           video.currentTime = VIDEO_START_TIME;
           video.play().catch(() => {});
         }
       };
 
-      // 3. Si el video ya había cargado su metadata antes de que el código llegara aquí, lo ejecutamos
-      if (video.readyState >= 1) {
-        handleLoadedMetadata();
-      } else {
-        video.addEventListener('loadedmetadata', handleLoadedMetadata);
-      }
-      
+      video.addEventListener('loadedmetadata', handleLoadedMetadata);
       video.addEventListener('timeupdate', handleTimeUpdate);
 
       return () => {
@@ -65,13 +51,8 @@ export function IntroVideo({ label = 'Watch intro' }: { label?: string }) {
     let cleanup: (() => void) | undefined;
 
     const interval = setInterval(() => {
-      const result = setupVideo();
-      
-      // 4. AQUÍ ESTÁ EL FIX DEL ERROR:
-      // Verificamos que 'result' sea una función antes de asignarlo a 'cleanup'.
-      // Así TypeScript sabe que jamás le asignaremos el 'false'.
-      if (typeof result === 'function') {
-        cleanup = result;
+      cleanup = setupVideo();
+      if (cleanup) {
         clearInterval(interval);
       }
     }, 100);

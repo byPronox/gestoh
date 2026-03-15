@@ -1,8 +1,10 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 import { navItems } from './nav-items';
 import { cn } from '@/lib/utils';
+import { ChevronDownIcon } from '@/icons/icons';
 import { useLocale } from '@/lib/locale';
 import { getLocalizedPath } from '@/lib/locale';
 
@@ -13,6 +15,11 @@ interface MobileMenuProps {
 export default function MainMobileNav({ isOpen }: MobileMenuProps) {
   const pathname = usePathname();
   const locale = useLocale();
+  const [activeDropdown, setActiveDropdown] = useState('');
+
+  const toggleDropdown = (key: string) => {
+    setActiveDropdown(activeDropdown === key ? '' : key);
+  };
 
   if (!isOpen) return null;
 
@@ -24,11 +31,10 @@ export default function MainMobileNav({ isOpen }: MobileMenuProps) {
             {navItems
               .filter((item) => item.type === 'link' && item.href !== '/text-generator')
               .map((item) => {
-                const href = getLocalizedPath(item.href || '/', locale);
-                
+                const href = getLocalizedPath(item.href, locale);
                 return (
                   <Link
-                    key={item.href || item.label}
+                    key={item.href}
                     href={href}
                     className={cn(
                       'block px-3 py-2 rounded-md text-sm font-medium text-gray-500 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700',

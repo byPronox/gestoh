@@ -57,7 +57,14 @@ export const copy: Record<
       items: { question: string; answer: string }[];
     };
     ctaClosing: string;
-    footer: { tagline: string };
+    footer: {
+      tagline: string;
+      services: string;
+      status: string;
+      pricing: string;
+      faq: string;
+      privacyPolicy: string;
+    };
   }
 > = {
   en: {
@@ -307,6 +314,11 @@ export const copy: Record<
     footer: {
       tagline:
         'We turn local businesses and SMBs into agile, data-driven operations. One ecosystem for POS, inventory, invoicing, and digital presence.',
+      services: 'Services',
+      status: 'Status',
+      pricing: 'Pricing',
+      faq: 'FAQ',
+      privacyPolicy: 'Privacy Policy',
     },
   },
   es: {
@@ -557,6 +569,11 @@ export const copy: Record<
     footer: {
       tagline:
         'Convertimos negocios locales y PYMES en operaciones ágiles y basadas en datos. Un ecosistema para punto de venta, inventario, facturación y presencia digital.',
+      services: 'Servicios',
+      status: 'Estado',
+      pricing: 'Precios',
+      faq: 'Preguntas Frecuentes',
+      privacyPolicy: 'Política de Privacidad',
     },
   },
 };
