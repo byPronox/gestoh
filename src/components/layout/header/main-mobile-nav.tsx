@@ -1,10 +1,10 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+
 import { navItems } from './nav-items';
 import { cn } from '@/lib/utils';
-import { ChevronDownIcon } from '@/icons/icons';
+
 import { useLocale } from '@/lib/locale';
 import { getLocalizedPath } from '@/lib/locale';
 
@@ -15,11 +15,6 @@ interface MobileMenuProps {
 export default function MainMobileNav({ isOpen }: MobileMenuProps) {
   const pathname = usePathname();
   const locale = useLocale();
-  const [activeDropdown, setActiveDropdown] = useState('');
-
-  const toggleDropdown = (key: string) => {
-    setActiveDropdown(activeDropdown === key ? '' : key);
-  };
 
   if (!isOpen) return null;
 
