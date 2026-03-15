@@ -24,7 +24,7 @@ export function IntroVideo({ label = 'Watch intro' }: { label?: string }) {
         '.fslightbox-flex-centered video'
       );
 
-      if (!video) return false;
+      if (!video) return undefined;
 
       video.muted = true;
       const handleLoadedMetadata = () => {
